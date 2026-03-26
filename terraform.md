@@ -53,10 +53,22 @@ gcloud iam service-accounts add-iam-policy-binding \
   --member="principalSet://iam.googleapis.com/projects/$(gcloud projects describe $PROJECT_ID --format='value(projectNumber)')/locations/global/workloadIdentityPools/github-pool/attribute.repository/${GITHUB_ORG}/${REPO_NAME}"
 
 
-## Get the Workload Identity Provider resource name
+## Get the Workload Identity Provider resource name to workflow key
 
 gcloud iam workload-identity-pools providers describe github-provider \
   --project=$PROJECT_ID \
   --location="global" \
   --workload-identity-pool="github-pool" \
   --format="value(name)"
+
+
+## Step 4 — Add GitHub repository secrets
+Go to your GitHub repo → Settings → Secrets and variables → Actions → New repository secret. Add these two:
+Secret nameValueWIF_PROVIDERthe full provider resource name from Step3 
+WIF_SERVICE_ACCOUNT = terraform account 
+
+
+## Step 5 — Create the GitHub Actions workflow
+In your repo create this file at .github/workflows/terraform.yml
+and past terraform code to manage services from github
+and create gcp gcs state bucket to manage terraform state file in remote backend

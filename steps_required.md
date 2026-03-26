@@ -1,4 +1,4 @@
-export PROJECT_ID="vertexai-489303"      # replace with yours
+export PROJECT_ID="project_id"      # replace with yours
 export REGION="us-central1"
 export CLUSTER_NAME="riskplatform-dev"
 export REPO_NAME="riskplatform"
