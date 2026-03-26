@@ -1,0 +1,39 @@
+export PROJECT_ID="vertexai-489303"      # replace with yours
+export REGION="us-central1"
+export CLUSTER_NAME="riskplatform-dev"
+export REPO_NAME="riskplatform"
+
+gcloud config set project $PROJECT_ID
+gcloud config set compute/region $REGION
+
+
+# cloud srvice enable
+gcloud services enable \
+  container.googleapis.com \
+  storage.googleapis.com \
+  bigquery.googleapis.com \
+  artifactregistry.googleapis.com \
+  sqladmin.googleapis.com \
+  secretmanager.googleapis.com \
+  iam.googleapis.com \
+  cloudresourcemanager.googleapis.com
+
+
+# First delete the failed cluster
+gcloud container clusters delete $CLUSTER_NAME --zone ${REGION}-a --quiet
+
+# Recreate with HDD disks and smaller boot disk
+gcloud container clusters create $CLUSTER_NAME \
+  --zone ${REGION}-a \
+  --num-nodes 2 \
+  --machine-type e2-standard-2 \
+  --enable-autoscaling \
+  --min-nodes 2 \
+  --max-nodes 4 \tenticate to gcs and bigquery without storing service account keys
+  --workload-pool=${PROJECT_ID}.svc.id.goog \ -- pods au
+  --enable-ip-alias \
+  --release-channel regular \
+  --disk-type pd-standard \
+  --disk-size 50
+
+
