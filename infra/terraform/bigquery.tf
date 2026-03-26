@@ -14,11 +14,11 @@ resource "google_bigquery_table" "scored_accounts" {
   deletion_protection = false
 
   schema = jsonencode([
-    { name = "account_id",      type = "STRING",    mode = "REQUIRED" },
-    { name = "score",           type = "FLOAT64",   mode = "REQUIRED" },
-    { name = "risk_band",       type = "STRING",    mode = "REQUIRED" },
-    { name = "scored_at",       type = "TIMESTAMP", mode = "REQUIRED" },
-    { name = "model_version",   type = "STRING",    mode = "NULLABLE" }
+    { name = "account_id", type = "STRING", mode = "REQUIRED" },
+    { name = "score", type = "FLOAT64", mode = "REQUIRED" },
+    { name = "risk_band", type = "STRING", mode = "REQUIRED" },
+    { name = "scored_at", type = "TIMESTAMP", mode = "REQUIRED" },
+    { name = "model_version", type = "STRING", mode = "NULLABLE" }
   ])
 
   time_partitioning {

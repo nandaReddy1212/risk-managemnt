@@ -8,7 +8,7 @@ resource "google_storage_bucket" "raw" {
 
   lifecycle_rule {
     condition { age = 90 }
-    action    { type = "Delete" }
+    action { type = "Delete" }
   }
 }
 

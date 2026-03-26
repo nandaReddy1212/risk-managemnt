@@ -20,9 +20,9 @@ resource "google_container_cluster" "riskplatform" {
 }
 
 resource "google_container_node_pool" "primary" {
-  name       = "primary-pool"
-  location   = var.zone
-  cluster    = google_container_cluster.riskplatform.name
+  name     = "primary-pool"
+  location = var.zone
+  cluster  = google_container_cluster.riskplatform.name
 
   autoscaling {
     min_node_count = 2
