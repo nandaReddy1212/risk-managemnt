@@ -72,3 +72,6 @@ WIF_SERVICE_ACCOUNT = terraform account
 In your repo create this file at .github/workflows/terraform.yml
 and past terraform code to manage services from github
 and create gcp gcs state bucket to manage terraform state file in remote backend
+
+
+### if any error due to project number then recreate everystep after delete of github workflow actions
