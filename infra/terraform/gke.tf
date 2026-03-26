@@ -26,9 +26,9 @@ resource "google_container_cluster" "riskplatform" {
 }
 
 resource "google_container_node_pool" "primary" {
-  name       = "primary-pool"
-  location   = var.zone
-  cluster    = google_container_cluster.riskplatform.name
+  name     = "primary-pool"
+  location = var.zone
+  cluster  = google_container_cluster.riskplatform.name
 
   autoscaling {
     min_node_count = 2
@@ -39,8 +39,8 @@ resource "google_container_node_pool" "primary" {
 
   node_config {
     machine_type = "e2-standard-2"
-    disk_type    = "pd-standard"    # HDD not SSD
-    disk_size_gb = 50               # 50GB not 100GB
+    disk_type    = "pd-standard" # HDD not SSD
+    disk_size_gb = 50            # 50GB not 100GB
 
     service_account = data.google_service_account.terraform_runner.email
 
