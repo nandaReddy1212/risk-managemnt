@@ -1,4 +1,4 @@
-# gke.tf
+#gke
 resource "google_container_cluster" "riskplatform" {
   name     = var.cluster_name
   location = var.zone
@@ -17,12 +17,18 @@ resource "google_container_cluster" "riskplatform" {
   }
 
   deletion_protection = false
+
+  timeouts {
+    create = "20m"
+    update = "20m"
+    delete = "20m"
+  }
 }
 
 resource "google_container_node_pool" "primary" {
-  name     = "primary-pool"
-  location = var.zone
-  cluster  = google_container_cluster.riskplatform.name
+  name       = "primary-pool"
+  location   = var.zone
+  cluster    = google_container_cluster.riskplatform.name
 
   autoscaling {
     min_node_count = 2
@@ -33,10 +39,10 @@ resource "google_container_node_pool" "primary" {
 
   node_config {
     machine_type = "e2-standard-2"
-    disk_type    = "pd-standard"
-    disk_size_gb = 50
+    disk_type    = "pd-standard"    # HDD not SSD
+    disk_size_gb = 50               # 50GB not 100GB
 
-    service_account = google_service_account.riskplatform_sa.email
+    service_account = data.google_service_account.terraform_runner.email
 
     oauth_scopes = [
       "https://www.googleapis.com/auth/cloud-platform"
