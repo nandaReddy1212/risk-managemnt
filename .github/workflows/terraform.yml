@@ -20,10 +20,22 @@ jobs:
     defaults:
       run:
         working-directory: infra/terraform
+    env:
+      TF_PLUGIN_CACHE_DIR: ${{ github.workspace }}/.terraform.d/plugin-cache
 
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      - name: Create plugin cache dir
+        run: mkdir -p ${{ github.workspace }}/.terraform.d/plugin-cache
+
+      - name: Cache Terraform providers
+        uses: actions/cache@v4
+        with:
+          path: ${{ github.workspace }}/.terraform.d/plugin-cache
+          key: terraform-${{ hashFiles('infra/terraform/.terraform.lock.hcl') }}
+          restore-keys: terraform-
 
       - name: Authenticate to GCP
         uses: google-github-actions/auth@v2
@@ -39,6 +51,7 @@ jobs:
 
       - name: Terraform Init
         run: terraform init
+        timeout-minutes: 10
 
       - name: Terraform Format Check
         run: terraform fmt -check
@@ -48,7 +61,7 @@ jobs:
 
       - name: Terraform Plan
         run: terraform plan -no-color
-        timeout-minutes: 5      # fail fast if plan hangs
+        timeout-minutes: 15
 
   apply:
     name: Terraform apply
@@ -58,10 +71,22 @@ jobs:
     defaults:
       run:
         working-directory: infra/terraform
+    env:
+      TF_PLUGIN_CACHE_DIR: ${{ github.workspace }}/.terraform.d/plugin-cache
 
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      - name: Create plugin cache dir
+        run: mkdir -p ${{ github.workspace }}/.terraform.d/plugin-cache
+
+      - name: Cache Terraform providers
+        uses: actions/cache@v4
+        with:
+          path: ${{ github.workspace }}/.terraform.d/plugin-cache
+          key: terraform-${{ hashFiles('infra/terraform/.terraform.lock.hcl') }}
+          restore-keys: terraform-
 
       - name: Authenticate to GCP
         uses: google-github-actions/auth@v2
@@ -77,6 +102,7 @@ jobs:
 
       - name: Terraform Init
         run: terraform init
+        timeout-minutes: 10
 
       - name: Terraform Apply
         run: terraform apply -auto-approve
