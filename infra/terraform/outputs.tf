@@ -1,12 +1,12 @@
-# # outputs.tf
-# output "cluster_name" {
-#   value = google_container_cluster.riskplatform.name
-# }
+# outputs.tf
+output "cluster_name" {
+  value = google_container_cluster.riskplatform.name
+}
 
-# output "cluster_endpoint" {
-#   value     = google_container_cluster.riskplatform.endpoint
-#   sensitive = true
-# }
+output "cluster_endpoint" {
+  value     = google_container_cluster.riskplatform.endpoint
+  sensitive = true
+}
 
 output "gcs_raw_bucket" {
   value = google_storage_bucket.raw.name

@@ -22,8 +22,12 @@ jobs:
         working-directory: infra/terraform
     env:
       TF_PLUGIN_CACHE_DIR: ${{ github.workspace }}/.terraform.d/plugin-cache
+      TF_VAR_project_id: vertexai-489303
+      TF_VAR_region: us-central1
+      TF_VAR_zone: us-central1-a
+      TF_VAR_cluster_name: riskplatform-dev
+      TF_VAR_gcs_location: US-CENTRAL1
       GOOGLE_PROJECT: vertexai-489303
-      TF_LOG: INFO
 
     steps:
       - name: Checkout
@@ -51,8 +55,8 @@ jobs:
         with:
           terraform_version: 1.7.0
 
-      - name: Terraform Init
-        run: terraform init
+      - name: Terraform Init with migration
+        run: terraform init -migrate-state -force-copy
         timeout-minutes: 10
 
       - name: Terraform Format Check
@@ -63,7 +67,7 @@ jobs:
 
       - name: Terraform Plan
         run: terraform plan -no-color
-        timeout-minutes: 15
+        timeout-minutes: 10
 
   apply:
     name: Terraform apply
@@ -75,8 +79,13 @@ jobs:
         working-directory: infra/terraform
     env:
       TF_PLUGIN_CACHE_DIR: ${{ github.workspace }}/.terraform.d/plugin-cache
+      TF_VAR_project_id: vertexai-489303
+      TF_VAR_region: us-central1
+      TF_VAR_zone: us-central1-a
+      TF_VAR_cluster_name: riskplatform-dev
+      TF_VAR_gcs_location: US-CENTRAL1
       GOOGLE_PROJECT: vertexai-489303
-      TF_LOG: INFO
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -103,10 +112,10 @@ jobs:
         with:
           terraform_version: 1.7.0
 
-      - name: Terraform Init
-        run: terraform init
+      - name: Terraform Init with migration
+        run: terraform init -migrate-state -force-copy
         timeout-minutes: 10
 
       - name: Terraform Apply
         run: terraform apply -auto-approve
-        timeout-minutes: 30
+        timeout-minutes: 40      # GKE needs up to 30min
