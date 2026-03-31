@@ -1,12 +1,12 @@
 # bigquery.tf
-resource "google_bigquery_dataset" "risk_results" {
-  dataset_id    = "risk_results"
-  friendly_name = "Risk Model Results"
-  description   = "Scored outputs from risk models"
-  location      = var.region
+# resource "google_bigquery_dataset" "risk_results" {
+#   dataset_id    = "risk_results"
+#   friendly_name = "Risk Model Results"
+#   description   = "Scored outputs from risk models"
+#   location      = var.region
 
-  delete_contents_on_destroy = true
-}
+#   delete_contents_on_destroy = true
+# }
 
 resource "google_bigquery_table" "scored_accounts" {
   dataset_id          = google_bigquery_dataset.risk_results.dataset_id

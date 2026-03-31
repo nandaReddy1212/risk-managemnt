@@ -20,8 +20,12 @@
 #   value = google_storage_bucket.models.name
 # }
 
-output "bq_dataset" {
-  value = google_bigquery_dataset.risk_results.dataset_id
+# output "bq_dataset" {
+#   value = google_bigquery_dataset.risk_results.dataset_id
+# }
+
+output "bq_table" {
+  value = google_bigquery_table.scored_accounts.table_id
 }
 
 output "service_account_email" {
