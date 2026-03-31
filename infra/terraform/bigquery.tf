@@ -9,7 +9,7 @@
 # }
 
 resource "google_bigquery_table" "scored_accounts" {
-  dataset_id          = google_bigquery_dataset.risk_results.dataset_id
+  dataset_id          = "risk_results"
   table_id            = "scored_accounts"
   deletion_protection = false
 
