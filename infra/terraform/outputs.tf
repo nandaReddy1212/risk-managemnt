@@ -28,6 +28,6 @@ output "bq_table" {
   value = google_bigquery_table.scored_accounts.table_id
 }
 
-output "service_account_email" {
-  value = google_service_account.riskplatform_sa.email
-}
+# output "service_account_email" {
+#   value = google_service_account.riskplatform_sa.email
+# }

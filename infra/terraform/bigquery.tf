@@ -10,7 +10,7 @@
 
 resource "google_bigquery_table" "scored_accounts" {
   dataset_id          = "risk_results"
-  table_id            = "scored_accounts"
+  table_id            = "risk_scored_accounts"
   deletion_protection = false
 
   schema = jsonencode([
