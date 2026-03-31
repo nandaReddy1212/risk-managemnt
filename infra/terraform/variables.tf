@@ -16,14 +16,14 @@ variable "zone" {
   default     = "us-central1-a"
 }
 
-variable "cluster_name" {
-  description = "GKE cluster name"
-  type        = string
-  default     = "riskplatform-dev"
-}
+# variable "cluster_name" {
+#   description = "GKE cluster name"
+#   type        = string
+#   default     = "riskplatform-dev"
+# }
 
-variable "gcs_location" {
-  description = "GCS bucket location"
-  type        = string
-  default     = "US-CENTRAL1"
-}
+# variable "gcs_location" {
+#   description = "GCS bucket location"
+#   type        = string
+#   default     = "US-CENTRAL1"
+# }

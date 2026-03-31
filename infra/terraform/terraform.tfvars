@@ -2,4 +2,4 @@
 project_id   = "vertexai-489303"
 region       = "us-central1"
 zone         = "us-central1-a"
-cluster_name = "riskplatform-dev"
+# cluster_name = "riskplatform-dev"
