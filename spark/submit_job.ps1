@@ -39,3 +39,5 @@ gcloud dataproc batches submit pyspark `
 
 Write-Host "Job submitted! Check status at:"
 Write-Host "https://console.cloud.google.com/dataproc/batches?project=$PROJECT_ID"
+
+#--jars=gs://spark-lib/bigquery/spark-bigquery-latest_2.12.jar `
