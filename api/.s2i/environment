@@ -1,4 +1,4 @@
-APP_MODULE=riskplatform.wsgi
+APP_SCRIPT=run.sh
 DJANGO_SECRET_KEY=riskplatform-secret-key-2026
 DEBUG=False
 ALLOWED_HOSTS=*
