@@ -1,12 +1,6 @@
-# Create .s2i folder
-mkdir C:\risk-managemnt\api\.s2i
-
-# Create environment file
-@"
 APP_MODULE=riskplatform.wsgi
 DJANGO_SECRET_KEY=riskplatform-secret-key-2026
 DEBUG=False
 ALLOWED_HOSTS=*
 DB_ENGINE=django.db.backends.sqlite3
 DJANGO_SETTINGS_MODULE=riskplatform.settings
-"@ | Out-File -FilePath C:\risk-managemnt\api\.s2i\environment -Encoding utf8
