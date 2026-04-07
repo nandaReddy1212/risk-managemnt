@@ -12,7 +12,7 @@ class SparkJobSerializer(serializers.ModelSerializer):
     hidden from regular users.
     """
     # this adds submitted_by username instead of just user ID
-    submitted_by = serializers.SringRelatedField(source='submitted_by.username', read_only=True)
+    submitted_by = serializers.StringRelatedField(source='submitted_by.username', read_only=True)
 
     class Meta:
         model = SparkJob
@@ -35,14 +35,9 @@ class SparkJobDetailSerializer(SparkJobSerializer):
     """
     Extended serializer for admin users.
     Shows additional internal fields hidden from regular users.
-    
-    Business reason: Admins need error details and internal
-    GCP batch IDs for troubleshooting failed jobs.
     """
-    submitted_by = serializers.SringRelatedField(source='submitted_by.username', read_only=True)
-
     class Meta(SparkJobSerializer.Meta):
         fields = SparkJobSerializer.Meta.fields + [
             'error_message',
-            'dataproc_batch_id'
-    ]
+            'dataproc_job_id',    # changed from dataproc_batch_id to match model
+        ]
