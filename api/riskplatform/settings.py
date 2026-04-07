@@ -178,3 +178,12 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+# OpenShift specific settings
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_URL = '/static/'
+
+# Allow all hosts for OpenShift
+import os
+ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '*').split(',')
